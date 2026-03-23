@@ -1,0 +1,220 @@
+{
+  "last_updated_at": "2026-03-23T12:19:27.616467",
+  "record_count": 26,
+  "source_urls": [
+    "https://stockanalysis.com/actions/spinoffs/",
+    "https://stockanalysis.com/actions/spinoffs/2026/",
+    "https://stockanalysis.com/actions/spinoffs/2025/",
+    "https://stockanalysis.com/actions/spinoffs/2024/"
+  ],
+  "records": [
+    {
+      "parent_ticker": "RNAM",
+      "spunoff_ticker": "RNA",
+      "parent_name": "Avidity Biosciences Inc",
+      "spunoff_name": "Atrium Therapeutics Inc",
+      "spinoff_date": "2026-02-26",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2026/"
+    },
+    {
+      "parent_ticker": "CMCSA",
+      "spunoff_ticker": "VSNT",
+      "parent_name": "Comcast Corp",
+      "spunoff_name": "Versant Media Group Inc",
+      "spinoff_date": "2026-01-05",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2026/"
+    },
+    {
+      "parent_ticker": "UL",
+      "spunoff_ticker": "MICC",
+      "parent_name": "Unilever PLC",
+      "spunoff_name": "Magnum Ice Cream Co Nv",
+      "spinoff_date": "2025-12-08",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "LBRDA",
+      "spunoff_ticker": "GLIBR",
+      "parent_name": "Liberty Broadband Corp",
+      "spunoff_name": "Gci Liberty Inc",
+      "spinoff_date": "2025-11-26",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "GLIBK",
+      "spunoff_ticker": "GLIBR",
+      "parent_name": "Gci Liberty Inc",
+      "spunoff_name": "Gci Liberty Inc",
+      "spinoff_date": "2025-11-26",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "DD",
+      "spunoff_ticker": "Q",
+      "parent_name": "Dupont De Nemours Inc",
+      "spunoff_name": "Qnity Electronics Inc",
+      "spinoff_date": "2025-11-03",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "HON",
+      "spunoff_ticker": "SOLS",
+      "parent_name": "Honeywell International Inc",
+      "spunoff_name": "Solstice Advanced Materials Inc",
+      "spinoff_date": "2025-10-30",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "LBRDK",
+      "spunoff_ticker": "GLIBK",
+      "parent_name": "Liberty Broadband Corp",
+      "spunoff_name": "Gci Liberty Inc",
+      "spinoff_date": "2025-07-15",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "LBRDA",
+      "spunoff_ticker": "GLIBA",
+      "parent_name": "Liberty Broadband Corp",
+      "spunoff_name": "Gci Liberty Inc",
+      "spinoff_date": "2025-07-15",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "FTV",
+      "spunoff_ticker": "RAL",
+      "parent_name": "Fortive Corp",
+      "spunoff_name": "Ralliant Corp",
+      "spinoff_date": "2025-06-30",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "CMRE",
+      "spunoff_ticker": "CMDB",
+      "parent_name": "Costamare Inc",
+      "spunoff_name": "Costamare Bulkers Holdings Ltd.",
+      "spinoff_date": "2025-05-07",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "IAC",
+      "spunoff_ticker": "ANGI",
+      "parent_name": "Iac Inc",
+      "spunoff_name": "Angi Inc",
+      "spinoff_date": "2025-04-01",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "ESEA",
+      "spunoff_ticker": "EHLD",
+      "parent_name": "Euroseas Ltd.",
+      "spunoff_name": "Euroholdings Ltd.",
+      "spinoff_date": "2025-03-18",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "CMPO",
+      "spunoff_ticker": "RHLD",
+      "parent_name": "Composecure Inc",
+      "spunoff_name": "Resolute Holdings Management Inc",
+      "spinoff_date": "2025-02-28",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "WDC",
+      "spunoff_ticker": "SNDK",
+      "parent_name": "Western Digital Corp",
+      "spunoff_name": "Sandisk Corp",
+      "spinoff_date": "2025-02-24",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "LEN",
+      "spunoff_ticker": "MRP",
+      "parent_name": "Lennar Corp",
+      "spunoff_name": "Millrose Properties Inc",
+      "spinoff_date": "2025-02-07",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "FATBB",
+      "spunoff_ticker": "TWNP",
+      "parent_name": "Fat Brands Inc",
+      "spunoff_name": "Twin Hospitality Group Inc",
+      "spinoff_date": "2025-01-30",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "FAT",
+      "spunoff_ticker": "TWNP",
+      "parent_name": "Fat Brands Inc",
+      "spunoff_name": "Twin Hospitality Group Inc",
+      "spinoff_date": "2025-01-30",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2025/"
+    },
+    {
+      "parent_ticker": "SEM",
+      "spunoff_ticker": "CON",
+      "parent_name": "Select Medical Holdings Corp",
+      "spunoff_name": "Concentra Group Holdings Parent Inc",
+      "spinoff_date": "2024-11-26",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    },
+    {
+      "parent_ticker": "LBTYB",
+      "spunoff_ticker": "SNREY",
+      "parent_name": "Liberty Global Ltd.",
+      "spunoff_name": "Sunrise Communications Ag",
+      "spinoff_date": "2024-11-13",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    },
+    {
+      "parent_ticker": "LBTYA",
+      "spunoff_ticker": "SNREY",
+      "parent_name": "Liberty Global Ltd.",
+      "spunoff_name": "Sunrise Communications Ag",
+      "spinoff_date": "2024-11-13",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    },
+    {
+      "parent_ticker": "BERY",
+      "spunoff_ticker": "MAGN",
+      "parent_name": "Berry Global Group Inc",
+      "spunoff_name": "Magnera Corp",
+      "spinoff_date": "2024-11-05",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    },
+    {
+      "parent_ticker": "MDU",
+      "spunoff_ticker": "ECG",
+      "parent_name": "Mdu Resources Group Inc",
+      "spunoff_name": "Everus Construction Group Inc",
+      "spinoff_date": "2024-11-01",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    },
+    {
+      "parent_ticker": "TRP",
+      "spunoff_ticker": "SOBO",
+      "parent_name": "Tc Energy Corp",
+      "spunoff_name": "South Bow Corp",
+      "spinoff_date": "2024-10-02",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    },
+    {
+      "parent_ticker": "SITC",
+      "spunoff_ticker": "CURB",
+      "parent_name": "Site Centers Corp",
+      "spunoff_name": "Curbline Properties Corp",
+      "spinoff_date": "2024-10-01",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    },
+    {
+      "parent_ticker": "J",
+      "spunoff_ticker": "AMTM",
+      "parent_name": "Jacobs Solutions Inc",
+      "spunoff_name": "Amentum Holdings Inc",
+      "spinoff_date": "2024-09-30",
+      "source_url": "https://stockanalysis.com/actions/spinoffs/2024/"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+.env
+output/charts/
+output/logs/
+src/__pycache__/
+*.pyc

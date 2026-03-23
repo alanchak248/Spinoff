@@ -1,0 +1,45 @@
+stockanalysis:
+  base_url: "https://stockanalysis.com/actions/spinoffs"
+  request_timeout_seconds: 30
+  lookback_months: 18
+
+universe:
+  path: "data/tracked_spinoffs.json"
+  refresh_on_run: true
+
+market_data:
+  data_base_url: "https://data.alpaca.markets/v2"
+  paper_trading_base_url: "https://paper-api.alpaca.markets/v2"
+  daily_lookback_years: 10
+  request_timeout_seconds: 30
+  feed: "iex"
+  adjustment: "all"
+  api_key_env: "APCA_API_KEY_ID"
+  api_secret_env: "APCA_API_SECRET_KEY"
+  chart_bars:
+    1d: 252
+    1wk: 104
+
+charts:
+  output_dir: "output/charts"
+  part_dir_name: "_parts"
+  cleanup_before_run: true
+  cleanup_after_run: true
+
+telegram:
+  enabled: true
+  batch_size: 10
+  timeout_seconds: 60
+  bot_token_env: "TELEGRAM_BOT_TOKEN"
+  chat_id_env: "TELEGRAM_CHAT_ID"
+
+runtime:
+  max_pairs_per_run:
+
+schedule:
+  timezone: "Asia/Hong_Kong"
+  hour: 9
+  minute: 0
+
+logging:
+  output_dir: "output/logs"

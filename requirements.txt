@@ -1,0 +1,7 @@
+requests>=2.32.0
+pandas>=2.2.0
+PyYAML>=6.0.1
+mplfinance>=0.12.10b0
+matplotlib>=3.9.0
+Pillow>=10.4.0
+lxml>=5.2.0
