@@ -4,6 +4,7 @@ import argparse
 import logging
 import shutil
 import sys
+from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
 
@@ -22,6 +23,19 @@ from src.telegram_sender import TelegramSender
 from src.universe import SpinoffRecord, UniverseStore, sort_records
 
 LOGGER = logging.getLogger(__name__)
+
+
+@dataclass(frozen=True)
+class UniverseSnapshot:
+    records: list[SpinoffRecord]
+    new_record_count: int
+
+
+@dataclass(frozen=True)
+class RunStats:
+    deliverable_group_count: int
+    delivered_image_count: int
+    skipped_company_count: int
 
 
 def main() -> int:
@@ -52,7 +66,12 @@ def run_daily_job(
     LOGGER.info("Logging to %s", log_path)
 
     reference_date = date.today()
-    records = _load_or_refresh_universe(settings, reference_date=reference_date, skip_refresh=skip_refresh)
+    universe_snapshot = _load_or_refresh_universe(
+        settings,
+        reference_date=reference_date,
+        skip_refresh=skip_refresh,
+    )
+    records = universe_snapshot.records
     if not records:
         LOGGER.error("No spin-off records are available to process.")
         return 1
@@ -79,9 +98,10 @@ def run_daily_job(
 
     try:
         final_image_groups: list[list[Path]] = []
+        skipped_company_count = 0
         for record in records:
             try:
-                image_group = process_spinoff_pair(
+                image_group, pair_skipped_count = process_spinoff_pair(
                     record,
                     settings=settings,
                     reference_date=reference_date,
@@ -97,10 +117,16 @@ def run_daily_job(
                     exc_info=True,
                 )
                 continue
+            skipped_company_count += pair_skipped_count
             if image_group:
                 final_image_groups.append(image_group)
 
         total_images = sum(len(image_group) for image_group in final_image_groups)
+        run_stats = RunStats(
+            deliverable_group_count=len(final_image_groups),
+            delivered_image_count=total_images,
+            skipped_company_count=skipped_company_count,
+        )
         LOGGER.info("Generated %s deliverable groups (%s total images)", len(final_image_groups), total_images)
         if not final_image_groups:
             LOGGER.error("No deliverable company images were generated.")
@@ -108,7 +134,16 @@ def run_daily_job(
 
         if not skip_telegram:
             if settings.telegram.is_configured:
-                TelegramSender(settings.telegram).send_image_groups(final_image_groups)
+                sender = TelegramSender(settings.telegram)
+                sender.send_text(
+                    _build_telegram_summary(
+                        reference_date=reference_date,
+                        tracked_pair_count=len(records),
+                        new_record_count=universe_snapshot.new_record_count,
+                        run_stats=run_stats,
+                    )
+                )
+                sender.send_image_groups(final_image_groups)
             else:
                 LOGGER.warning(
                     "Telegram is enabled but credentials are missing. Set %s and %s to send images.",
@@ -129,7 +164,7 @@ def process_spinoff_pair(
     reference_date: date,
     run_output_dir: Path,
     part_output_dir: Path,
-) -> list[Path]:
+) -> tuple[list[Path], int]:
     LOGGER.info(
         "Processing pair %s/%s from %s",
         record.spunoff_ticker,
@@ -145,6 +180,7 @@ def process_spinoff_pair(
     pair_part_dir = part_output_dir / pair_slug
 
     deliverable_images: list[Path] = []
+    skipped_company_count = 0
 
     if _bundle_has_usable_chart(spunoff_bundle, reference_date=reference_date):
         spunoff_images = _render_company_bundle(
@@ -165,6 +201,7 @@ def process_spinoff_pair(
         )
     else:
         LOGGER.info("Skipping child image for %s because weekly/daily data is not usable.", record.spunoff_ticker)
+        skipped_company_count += 1
 
     if _bundle_has_usable_chart(parent_bundle, reference_date=reference_date):
         parent_images = _render_company_bundle(
@@ -185,8 +222,9 @@ def process_spinoff_pair(
         )
     else:
         LOGGER.info("Skipping parent image for %s because weekly/daily data is not usable.", record.parent_ticker)
+        skipped_company_count += 1
 
-    return deliverable_images
+    return deliverable_images, skipped_company_count
 
 
 def _load_or_refresh_universe(
@@ -194,23 +232,43 @@ def _load_or_refresh_universe(
     *,
     reference_date: date,
     skip_refresh: bool,
-) -> list[SpinoffRecord]:
+) -> UniverseSnapshot:
     store = UniverseStore(settings.universe.path)
     stored_records = store.load()
 
     should_refresh = settings.universe.refresh_on_run and not skip_refresh
     if not should_refresh:
-        return sort_records(stored_records)
+        return UniverseSnapshot(records=sort_records(stored_records), new_record_count=0)
 
     try:
         scraped_records, source_urls = scrape_recent_spinoffs(settings, reference_date=reference_date)
         if scraped_records:
+            stored_keys = {record.key for record in stored_records}
+            new_record_count = sum(1 for record in scraped_records if record.key not in stored_keys)
             store.save(scraped_records, fetched_at=datetime.utcnow(), source_urls=source_urls)
-            return sort_records(scraped_records)
+            return UniverseSnapshot(records=sort_records(scraped_records), new_record_count=new_record_count)
     except Exception as exc:  # noqa: BLE001
         LOGGER.error("Universe refresh failed, falling back to stored data: %s", exc, exc_info=True)
 
-    return sort_records(stored_records)
+    return UniverseSnapshot(records=sort_records(stored_records), new_record_count=0)
+
+
+def _build_telegram_summary(
+    *,
+    reference_date: date,
+    tracked_pair_count: int,
+    new_record_count: int,
+    run_stats: RunStats,
+) -> str:
+    return "\n".join(
+        [
+            f"Spin-off charts for {reference_date.isoformat()}",
+            f"Tracked pairs: {tracked_pair_count}",
+            f"New pairs added: {new_record_count}",
+            f"Images sending: {run_stats.delivered_image_count}",
+            f"Companies skipped: {run_stats.skipped_company_count}",
+        ]
+    )
 
 
 def _render_company_bundle(

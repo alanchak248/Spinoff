@@ -33,6 +33,26 @@ class TelegramSender:
                         exc_info=True,
                     )
 
+    def send_text(self, text: str) -> None:
+        for chat_id in self.settings.chat_ids:
+            try:
+                response = requests.post(
+                    f"{self.base_url}/sendMessage",
+                    data={
+                        "chat_id": chat_id,
+                        "text": text,
+                    },
+                    timeout=self.settings.timeout_seconds,
+                )
+                response.raise_for_status()
+            except Exception as exc:  # noqa: BLE001
+                LOGGER.error(
+                    "Telegram text send failed for chat %s: %s",
+                    chat_id,
+                    exc,
+                    exc_info=True,
+                )
+
     def send_image_groups(self, image_groups: Iterable[list[Path]]) -> None:
         for chat_id in self.settings.chat_ids:
             for image_group in image_groups:
