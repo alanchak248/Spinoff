@@ -14,8 +14,8 @@ on:
         default: ""
         type: string
   schedule:
-    # 01:00 UTC = 09:00 Asia/Hong_Kong
-    - cron: "0 1 * * *"
+    # 01:05 UTC = 09:05 Asia/Hong_Kong; avoid top-of-hour schedule congestion.
+    - cron: "5 1 * * *"
 
 permissions:
   contents: read

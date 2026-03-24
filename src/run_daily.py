@@ -36,6 +36,8 @@ class RunStats:
     deliverable_group_count: int
     delivered_image_count: int
     skipped_company_count: int
+    failed_pair_count: int
+    failed_company_count: int
 
 
 def main() -> int:
@@ -99,6 +101,7 @@ def run_daily_job(
     try:
         final_image_groups: list[list[Path]] = []
         skipped_company_count = 0
+        failed_pair_count = 0
         for record in records:
             try:
                 image_group, pair_skipped_count = process_spinoff_pair(
@@ -116,6 +119,7 @@ def run_daily_job(
                     exc,
                     exc_info=True,
                 )
+                failed_pair_count += 1
                 continue
             skipped_company_count += pair_skipped_count
             if image_group:
@@ -126,6 +130,8 @@ def run_daily_job(
             deliverable_group_count=len(final_image_groups),
             delivered_image_count=total_images,
             skipped_company_count=skipped_company_count,
+            failed_pair_count=failed_pair_count,
+            failed_company_count=failed_pair_count * 2,
         )
         LOGGER.info("Generated %s deliverable groups (%s total images)", len(final_image_groups), total_images)
         if not final_image_groups:
@@ -260,13 +266,16 @@ def _build_telegram_summary(
     new_record_count: int,
     run_stats: RunStats,
 ) -> str:
+    tracked_company_count = tracked_pair_count * 2
     return "\n".join(
         [
             f"Spin-off charts for {reference_date.isoformat()}",
             f"Tracked pairs: {tracked_pair_count}",
+            f"Tracked companies: {tracked_company_count}",
             f"New pairs added: {new_record_count}",
             f"Images sending: {run_stats.delivered_image_count}",
             f"Companies skipped: {run_stats.skipped_company_count}",
+            f"Companies failed: {run_stats.failed_company_count}",
         ]
     )
 
